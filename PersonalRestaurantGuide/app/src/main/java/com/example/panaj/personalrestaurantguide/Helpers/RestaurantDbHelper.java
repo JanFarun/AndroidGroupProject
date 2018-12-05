@@ -1,6 +1,8 @@
 package com.example.panaj.personalrestaurantguide.Helpers;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -27,4 +29,63 @@ public class RestaurantDbHelper extends SQLiteOpenHelper {
         onCreate(db);
         Log.d("DB-TEST","DATABASE UPGRADED!");
     }
+
+    public static long addPresenter(SQLiteDatabase db, Restaurant restaurant) {
+
+        ContentValues values = new ContentValues();
+        values.put(RestaurantContract.RestaurantEntry.COL_NAME_NAME, restaurant.getName());
+        values.put(RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS, restaurant.getAddress());
+        values.put(RestaurantContract.RestaurantEntry.COL_NAME_PHONE, restaurant.getPhoneNumber());
+        values.put(RestaurantContract.RestaurantEntry.COL_NAME_TAG, restaurant.getTag());
+        values.put(RestaurantContract.RestaurantEntry.COL_NAME_RATE, restaurant.getRate());
+
+        return db.insert(RestaurantContract.RestaurantEntry.TABLE_NAME, null, values);
+    }
+
+    public Restaurant getRestaurantData(SQLiteDatabase db){
+        String [] projection ={
+                RestaurantContract.RestaurantEntry._ID,
+                RestaurantContract.RestaurantEntry.COL_NAME_NAME,
+                RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS,
+                RestaurantContract.RestaurantEntry.COL_NAME_PHONE,
+                RestaurantContract.RestaurantEntry.COL_NAME_TAG,
+                RestaurantContract.RestaurantEntry.COL_NAME_RATE
+        };
+
+        Cursor cursor = db.query(
+                RestaurantContract.RestaurantEntry.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+    if(cursor.moveToNext()){
+        String name = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_NAME));
+        String address = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS));
+        String phone = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_PHONE));
+        String tag = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_TAG));
+        String rate = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_RATE));
+        Restaurant restaurant = new Restaurant(name, address, phone, tag, rate);
+        return restaurant;
+    }
+        cursor.close();
+        return null;
 }
+
+    public Cursor getListContents (){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT * FROM "+ RestaurantContract.RestaurantEntry.TABLE_NAME,null);
+        return data;
+    }
+    public Cursor getDetailInfo (int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT * FROM "+ RestaurantContract.RestaurantEntry.TABLE_NAME+" where "+
+                RestaurantContract.RestaurantEntry._ID+" = "+id,null);
+        return data;
+    }
+}
+
+
