@@ -64,14 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 String phone = list.get(3).toString();
                 String tag = list.get(4).toString();
                 String rate = list.get(5).toString();
-                Intent i = new Intent(view.getContext(),RestaurantDetails.class);
-                i.putExtra("id",_id);
-                i.putExtra("name",name);
-                i.putExtra("address",address);
-                i.putExtra("phone",phone);
-                i.putExtra("tag",tag);
-                i.putExtra("rate",rate);
-                startActivity(i);
+                Intent i = new Intent()
+
             }
         });
 

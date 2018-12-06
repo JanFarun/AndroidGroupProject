@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.panaj.personalrestaurantguide.Helpers.Restaurant;
@@ -33,13 +32,13 @@ public class AddRestaurantActivity extends AppCompatActivity {
                 TextView addressTV = findViewById(R.id.eTxtAddress);
                 TextView phoneTV = findViewById(R.id.eTxtPhone);
                 TextView tagTV = findViewById(R.id.eTxtTag);
-                RatingBar bar = findViewById(R.id.rgRate);
+                RadioGroup rgRG = findViewById(R.id.rgRate);
 
                 String name = nameTV.getText().toString();
                 String address =  addressTV.getText().toString();
                 String phone = phoneTV.getText().toString();
                 String tag = tagTV.getText().toString();
-                int rate = bar.getNumStars();
+                int rate = rgRG.getCheckedRadioButtonId();
 
                 if (name.equals("")|| phone.equals("")||address.equals("")||tag.equals("")){
                     TextView error = findViewById(R.id.txtError);
