@@ -8,9 +8,9 @@ public class Restaurant {
     private String address;
     private String phoneNumber;
     private String tag;
-    private String rate ;
+    private int rate ;
 
-    public Restaurant(String name, String address, String phoneNumber, String tag, String rate){
+    public Restaurant(String name, String address, String phoneNumber, String tag, int rate){
         this.name = name;
         this.address = address;
         this.phoneNumber= phoneNumber;
@@ -19,7 +19,7 @@ public class Restaurant {
     }
 
 
-    public Restaurant(Long id, String name, String address, String phoneNumber, String tag, String rate){
+    public Restaurant(Long id, String name, String address, String phoneNumber, String tag, int rate){
         this.id = id;
         this.name = name;
         this.address = address;
@@ -69,11 +69,11 @@ public class Restaurant {
         this.tag = tag;
     }
 
-    public String getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 

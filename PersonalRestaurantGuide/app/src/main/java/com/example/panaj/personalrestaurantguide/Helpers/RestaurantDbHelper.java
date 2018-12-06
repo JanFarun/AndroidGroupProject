@@ -67,7 +67,7 @@ public class RestaurantDbHelper extends SQLiteOpenHelper {
         String address = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS));
         String phone = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_PHONE));
         String tag = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_TAG));
-        String rate = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_RATE));
+        int rate = cursor.getInt(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_RATE));
         Restaurant restaurant = new Restaurant(name, address, phone, tag, rate);
         return restaurant;
     }
