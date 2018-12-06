@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.panaj.personalrestaurantguide.Helpers.RestaurantDbHelper;
@@ -27,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TextView search = findViewById(R.id.search);
         btnAboutUs = findViewById(R.id.btnAboutUs);
         btnAddRestaurant = findViewById(R.id.btnAddRes);
         restaurantList = findViewById(R.id.listViewRestaurants);
@@ -93,6 +97,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(v.getContext(),AddRestaurantActivity.class);
                 startActivity(i);
+            }
+        });
+
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                (MainActivity.this).listAdapter.getFilter().filter(s);
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
     }

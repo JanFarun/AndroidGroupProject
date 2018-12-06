@@ -10,18 +10,13 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView;
-import android.widget.Toast;
-
 import com.example.panaj.personalrestaurantguide.Helpers.Restaurant;
 import com.example.panaj.personalrestaurantguide.Helpers.RestaurantDbHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AddRestaurantActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     Button addRestaurant;
-    String[] tags = {"Fast Food","Chinese","European","Italian","Indian"};
+    String[] tags = {"Vegetarian","Vegan","Organic","Thai","Chinese","European","Italian","Indian"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +49,12 @@ public class AddRestaurantActivity extends AppCompatActivity implements AdapterV
                 String des = desTV.getText().toString();
                 int rate = (int)rb.getRating();
 
-                if (name.equals("")|| phone.equals("")||address.equals("")||tag.equals("")){
+                if (name.equals("")|| phone.equals("")||address.equals("")||tag.equals("")||des.equals("")){
                     TextView error = findViewById(R.id.txtError);
                     error.setText("Missing input, add all your information.");
+                    if (rate==0){
+                        error.setText("Please rate us!");
+                    }
                 }
                 else {
                     RestaurantDbHelper.addPresenter(db, new Restaurant(name,address,phone,tag,des,rate));
