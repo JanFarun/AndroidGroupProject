@@ -15,7 +15,7 @@ public class RestaurantDbHelper extends SQLiteOpenHelper {
     public RestaurantDbHelper(Context context){
         super(context,DB_NAME,null,DB_VERSION);
     }
-
+    SQLiteDatabase db = this.getWritableDatabase();
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(RestaurantContract.SQL_CREATE_RESTAURANTS);
@@ -75,16 +75,31 @@ public class RestaurantDbHelper extends SQLiteOpenHelper {
         return null;
 }
 
+
     public Cursor getListContents (){
-        SQLiteDatabase db = this.getWritableDatabase();
         Cursor data = db.rawQuery("SELECT * FROM "+ RestaurantContract.RestaurantEntry.TABLE_NAME,null);
         return data;
     }
     public Cursor getDetailInfo (int id){
-        SQLiteDatabase db = this.getWritableDatabase();
+
         Cursor data = db.rawQuery("SELECT * FROM "+ RestaurantContract.RestaurantEntry.TABLE_NAME+" where "+
                 RestaurantContract.RestaurantEntry._ID+" = "+id,null);
         return data;
+    }
+
+    public void delete(int id){
+        db.execSQL("DELETE FROM "+RestaurantContract.RestaurantEntry.TABLE_NAME+" WHERE "+RestaurantContract.RestaurantEntry._ID+" ="+id);
+    }
+
+    public void edit(int id, String name, String address,String phone, String tag, int rate){
+
+        db.execSQL("UPDATE "+RestaurantContract.RestaurantEntry.TABLE_NAME+
+        " SET"+RestaurantContract.RestaurantEntry.COL_NAME_NAME +"="+name+","
+                +RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS +"="+address+","
+                +RestaurantContract.RestaurantEntry.COL_NAME_PHONE +"="+phone+","
+                +RestaurantContract.RestaurantEntry.COL_NAME_TAG+"="+tag+","
+                +RestaurantContract.RestaurantEntry.COL_NAME_RATE +"="+rate+
+        " WHERE "+RestaurantContract.RestaurantEntry._ID+"="+id);
     }
 }
 

@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int pos = restaurantList.getPositionForView(view);
                 ArrayList list = new ArrayList();
-                Cursor data = dbHelper.getDetailInfo(pos + 1);
+                Cursor data = dbHelper.getDetailInfo(pos+1);
                 while (data.moveToNext()){
                     list.add(data.getString(0));
                     list.add(data.getString(1));
