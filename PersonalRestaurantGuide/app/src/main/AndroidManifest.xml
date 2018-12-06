@@ -18,7 +18,6 @@
         </activity>
         <activity android:name=".AddRestaurantActivity" />
         <activity android:name=".RestaurantDetails" />
-        <activity android:name=".PresentersDetails" />
         <activity android:name=".AboutUsActivity"></activity>
     </application>
 
