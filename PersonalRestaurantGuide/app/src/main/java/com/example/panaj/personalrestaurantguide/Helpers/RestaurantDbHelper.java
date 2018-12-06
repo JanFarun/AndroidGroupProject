@@ -37,6 +37,7 @@ public class RestaurantDbHelper extends SQLiteOpenHelper {
         values.put(RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS, restaurant.getAddress());
         values.put(RestaurantContract.RestaurantEntry.COL_NAME_PHONE, restaurant.getPhoneNumber());
         values.put(RestaurantContract.RestaurantEntry.COL_NAME_TAG, restaurant.getTag());
+        values.put(RestaurantContract.RestaurantEntry.COL_NAME_DESCRIPTION,restaurant.getTag());
         values.put(RestaurantContract.RestaurantEntry.COL_NAME_RATE, restaurant.getRate());
 
         return db.insert(RestaurantContract.RestaurantEntry.TABLE_NAME, null, values);
@@ -49,6 +50,7 @@ public class RestaurantDbHelper extends SQLiteOpenHelper {
                 RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS,
                 RestaurantContract.RestaurantEntry.COL_NAME_PHONE,
                 RestaurantContract.RestaurantEntry.COL_NAME_TAG,
+                RestaurantContract.RestaurantEntry.COL_NAME_DESCRIPTION,
                 RestaurantContract.RestaurantEntry.COL_NAME_RATE
         };
 
@@ -67,8 +69,9 @@ public class RestaurantDbHelper extends SQLiteOpenHelper {
         String address = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS));
         String phone = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_PHONE));
         String tag = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_TAG));
+        String des = cursor.getString(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_DESCRIPTION));
         int rate = cursor.getInt(cursor.getColumnIndexOrThrow(RestaurantContract.RestaurantEntry.COL_NAME_RATE));
-        Restaurant restaurant = new Restaurant(name, address, phone, tag, rate);
+        Restaurant restaurant = new Restaurant(name, address, phone, tag, des, rate);
         return restaurant;
     }
         cursor.close();
@@ -91,15 +94,15 @@ public class RestaurantDbHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM "+RestaurantContract.RestaurantEntry.TABLE_NAME+" WHERE "+RestaurantContract.RestaurantEntry._ID+" ="+id);
     }
 
-    public void edit(int id, String name, String address,String phone, String tag, int rate){
-
-        db.execSQL("UPDATE "+RestaurantContract.RestaurantEntry.TABLE_NAME+
-        " SET"+RestaurantContract.RestaurantEntry.COL_NAME_NAME +"="+name+","
-                +RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS +"="+address+","
-                +RestaurantContract.RestaurantEntry.COL_NAME_PHONE +"="+phone+","
-                +RestaurantContract.RestaurantEntry.COL_NAME_TAG+"="+tag+","
-                +RestaurantContract.RestaurantEntry.COL_NAME_RATE +"="+rate+
-        " WHERE "+RestaurantContract.RestaurantEntry._ID+"="+id);
+    public void edit(int id, String name, String address,String phone, String tag,String des, int rate){
+        ContentValues cv = new ContentValues();
+        cv.put(RestaurantContract.RestaurantEntry.COL_NAME_NAME,name);
+        cv.put(RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS,address);
+        cv.put(RestaurantContract.RestaurantEntry.COL_NAME_PHONE,phone);
+        cv.put(RestaurantContract.RestaurantEntry.COL_NAME_TAG,tag);
+        cv.put(RestaurantContract.RestaurantEntry.COL_NAME_RATE,rate);
+        cv.put(RestaurantContract.RestaurantEntry.COL_NAME_DESCRIPTION,des);
+        db.update(RestaurantContract.RestaurantEntry.TABLE_NAME,cv,RestaurantContract.RestaurantEntry._ID+" ="+id,null);
     }
 }
 

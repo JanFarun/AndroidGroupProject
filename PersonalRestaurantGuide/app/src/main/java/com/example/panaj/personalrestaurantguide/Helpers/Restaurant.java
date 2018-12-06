@@ -8,26 +8,36 @@ public class Restaurant {
     private String address;
     private String phoneNumber;
     private String tag;
+    private String description;
     private int rate ;
 
-    public Restaurant(String name, String address, String phoneNumber, String tag, int rate){
+    public Restaurant(String name, String address, String phoneNumber, String tag,String description, int rate){
         this.name = name;
         this.address = address;
         this.phoneNumber= phoneNumber;
         this.tag = tag;
+        this.description = description;
         this.rate = rate;
     }
 
 
-    public Restaurant(Long id, String name, String address, String phoneNumber, String tag, int rate){
+    public Restaurant(Long id, String name, String address, String phoneNumber, String tag,String description, int rate){
         this.id = id;
         this.name = name;
         this.address = address;
         this.phoneNumber= phoneNumber;
         this.tag = tag;
+        this.description = description;
         this.rate = rate;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public long getId() {
         return id;
