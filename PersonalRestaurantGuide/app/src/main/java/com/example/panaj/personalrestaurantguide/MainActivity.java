@@ -17,20 +17,21 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button btnAddRestaurant;
+    Button btnAddRestaurant,btnAboutUs;
     RestaurantDbHelper dbHelper;
     ListView restaurantList;
-    ArrayAdapter listAddapter;
+    ArrayAdapter listAdapter;
     ArrayList<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btnAboutUs = findViewById(R.id.btnAboutUs);
         btnAddRestaurant = findViewById(R.id.btnAddRes);
         restaurantList = findViewById(R.id.listViewRestaurants);
         list = new ArrayList<>();
-        listAddapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,list);
+        listAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,list);
         dbHelper = new RestaurantDbHelper(this);
         final RestaurantDbHelper dbHelper = new RestaurantDbHelper(this);
         Cursor data = dbHelper.getListContents();
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         }else {
             while (data.moveToNext()){
                 list.add(data.getString(1)+" "+data.getString(4));
-                restaurantList.setAdapter(listAddapter);
+                restaurantList.setAdapter(listAdapter);
             }
         }
 
@@ -76,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnAboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(),AboutUsActivity.class);
+                startActivity(i);
+            }
+        });
 
         btnAddRestaurant.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
         Cursor data = dbHelper.getListContents();
         while (data.moveToNext()){
             list.add("Restaurant Name: "+data.getString(1)+"\nType of cuisine: "+data.getString(4));
-            restaurantList.setAdapter(listAddapter);
+            restaurantList.setAdapter(listAdapter);
         }
-        listAddapter.notifyDataSetChanged();
-        restaurantList.setAdapter(listAddapter);
+        listAdapter.notifyDataSetChanged();
+        restaurantList.setAdapter(listAdapter);
     }
 
 
