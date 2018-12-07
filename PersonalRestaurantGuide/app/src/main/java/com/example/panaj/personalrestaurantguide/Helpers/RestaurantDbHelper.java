@@ -37,7 +37,7 @@ public class RestaurantDbHelper extends SQLiteOpenHelper {
         values.put(RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS, restaurant.getAddress());
         values.put(RestaurantContract.RestaurantEntry.COL_NAME_PHONE, restaurant.getPhoneNumber());
         values.put(RestaurantContract.RestaurantEntry.COL_NAME_TAG, restaurant.getTag());
-        values.put(RestaurantContract.RestaurantEntry.COL_NAME_DESCRIPTION,restaurant.getTag());
+        values.put(RestaurantContract.RestaurantEntry.COL_NAME_DESCRIPTION,restaurant.getDescription());
         values.put(RestaurantContract.RestaurantEntry.COL_NAME_RATE, restaurant.getRate());
 
         return db.insert(RestaurantContract.RestaurantEntry.TABLE_NAME, null, values);
@@ -100,8 +100,8 @@ public class RestaurantDbHelper extends SQLiteOpenHelper {
         cv.put(RestaurantContract.RestaurantEntry.COL_NAME_ADDRESS,address);
         cv.put(RestaurantContract.RestaurantEntry.COL_NAME_PHONE,phone);
         cv.put(RestaurantContract.RestaurantEntry.COL_NAME_TAG,tag);
-        cv.put(RestaurantContract.RestaurantEntry.COL_NAME_RATE,rate);
         cv.put(RestaurantContract.RestaurantEntry.COL_NAME_DESCRIPTION,des);
+        cv.put(RestaurantContract.RestaurantEntry.COL_NAME_RATE,rate);
         db.update(RestaurantContract.RestaurantEntry.TABLE_NAME,cv,RestaurantContract.RestaurantEntry._ID+" ="+id,null);
     }
 }

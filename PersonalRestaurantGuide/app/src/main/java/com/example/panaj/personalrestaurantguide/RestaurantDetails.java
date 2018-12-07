@@ -1,5 +1,6 @@
 package com.example.panaj.personalrestaurantguide;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -66,6 +67,15 @@ public class RestaurantDetails extends AppCompatActivity {
                 int upRate = (int) bar.getRating();
                 dbHelper.edit(Integer.parseInt(id),upName,upAddress,upPhone,upTag,upDes,upRate);
                 finish();
+            }
+        });
+
+        Button btnMaps = findViewById(R.id.btnViewLocation);
+        btnMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(),MapsActivity.class);
+                startActivity(i);
             }
         });
     }

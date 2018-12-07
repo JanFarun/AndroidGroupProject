@@ -68,12 +68,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnDelete"
-                android:layout_width="184dp"
+                android:layout_width="182dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 android:text="Delete" />
@@ -84,6 +84,22 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/holo_blue_light"
                 android:text="Edit" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnViewLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/holo_green_dark"
+                android:text="View location on map" />
         </LinearLayout>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

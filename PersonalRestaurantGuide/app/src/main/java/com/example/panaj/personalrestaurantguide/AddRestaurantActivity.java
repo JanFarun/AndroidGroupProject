@@ -48,13 +48,16 @@ public class AddRestaurantActivity extends AppCompatActivity implements AdapterV
                 String tag = spinner.getSelectedItem().toString();
                 String des = desTV.getText().toString();
                 int rate = (int)rb.getRating();
+                TextView error = findViewById(R.id.txtError);
 
                 if (name.equals("")|| phone.equals("")||address.equals("")||tag.equals("")||des.equals("")){
-                    TextView error = findViewById(R.id.txtError);
                     error.setText("Missing input, add all your information.");
-                    if (rate==0){
-                        error.setText("Please rate us!");
-                    }
+                }
+                else if(!phone.matches("^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$")){
+                    error.setText("Wrong phone number format!");
+                }
+                else if(rate==0){
+                    error.setText("Please rate us!");
                 }
                 else {
                     RestaurantDbHelper.addPresenter(db, new Restaurant(name,address,phone,tag,des,rate));
