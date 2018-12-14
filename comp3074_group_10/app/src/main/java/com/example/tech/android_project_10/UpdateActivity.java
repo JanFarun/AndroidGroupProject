@@ -5,20 +5,31 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.regex.Pattern;
 
-public class UpdateActivity extends AppCompatActivity {
+public class UpdateActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     EditText tName,tAddress,tPhone,tDescription,tTags;
     RatingBar rbRating;
-
+    String[] tags = {"Vegetarian","Vegan","Organic","Thai","Chinese","European","Italian","Indian"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
+
+        final Spinner spinner2 = findViewById(R.id.spinner2);
+        spinner2.setOnItemSelectedListener(this);
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tags);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner2.setAdapter(aa);
+        final TextView tagValue = findViewById(R.id.txtTagValue);
 
         final RestaurantDbHelper dbHelper = new RestaurantDbHelper(this);
         final SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -36,13 +47,13 @@ public class UpdateActivity extends AppCompatActivity {
         tAddress=findViewById(R.id.editText_updateAddress);
         tPhone=findViewById(R.id.editText_updatePhone);
         tDescription=findViewById(R.id.editText_updateDescription);
-        tTags=findViewById(R.id.editText_updateTags);
         rbRating=findViewById(R.id.ratingBar_updateRating);
         tName.setText(name);
         tAddress.setText(address);
         tPhone.setText(phone);
         tDescription.setText(description);
-        tTags.setText(tags);
+
+        tagValue.setText(tags);
         rbRating.setRating(rating);
 
         findViewById(R.id.updateBtn).setOnClickListener(new View.OnClickListener() {
@@ -62,7 +73,7 @@ public class UpdateActivity extends AppCompatActivity {
                 }
 
                 String description = tDescription.getText().toString();
-                String tags = tTags.getText().toString();
+                String tags = spinner2.getSelectedItem().toString();
                 float rating = rbRating.getRating();
 
                 if (!name.equals("") || !address.equals("") || !tags.equals("")) {
@@ -84,5 +95,15 @@ public class UpdateActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

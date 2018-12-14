@@ -19,6 +19,7 @@ public class AddRestaurantActivity extends AppCompatActivity implements AdapterV
     String[] tags = {"Vegetarian","Vegan","Organic","Thai","Chinese","European","Italian","Indian"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_restaurant);
 

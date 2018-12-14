@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView search = findViewById(R.id.search);
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int pos = restaurantList.getPositionForView(view);
+
                 ArrayList list = new ArrayList();
                 Cursor data = dbHelper.getDetailInfo(pos+1);
                 while (data.moveToNext()){

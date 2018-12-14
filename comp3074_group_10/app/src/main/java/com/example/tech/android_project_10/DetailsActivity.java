@@ -12,6 +12,7 @@ public class DetailsActivity extends AppCompatActivity {
     TextView tName,tAddress,tDescription,tTags,tPhone;
     RatingBar rbRating;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,26 +22,26 @@ public class DetailsActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         Restaurant restaurant = (Restaurant) i.getSerializableExtra("restaurant");
-        final int id = restaurant.getId();
-        final String name = restaurant.getName();
-        final String address = restaurant.getAddress();
-        final String phone = restaurant.getPhone();
-        final String description = restaurant.getDescription();
-        final String tags = restaurant.getTags();
-        final float rating = restaurant.getRating();
-        tName = findViewById(R.id.textView_name);
-        tAddress = findViewById(R.id.textView_address);
-        tPhone = findViewById(R.id.textView_phone);
-        tDescription = findViewById(R.id.textView_description);
-        tTags = findViewById(R.id.textView_tags);
-        rbRating = findViewById(R.id.ratingBar_details);
-        tName.setText(name);
-        tAddress.setText(address);
-        tPhone.setText(phone);
-        tDescription.setText(description);
-        tTags.setText(tags);
-        rbRating.setRating(rating);
+            final int id = restaurant.getId();
+            final String name = restaurant.getName();
+            final String address = restaurant.getAddress();
+            final String phone = restaurant.getPhone();
+            final String description = restaurant.getDescription();
+            final String tags = restaurant.getTags();
+            final float rating = restaurant.getRating();
 
+            tName = findViewById(R.id.textView_name);
+            tAddress = findViewById(R.id.textView_address);
+            tPhone = findViewById(R.id.textView_phone);
+            tDescription = findViewById(R.id.textView_description);
+            tTags = findViewById(R.id.textView_tags);
+            rbRating = findViewById(R.id.ratingBar_details);
+            tName.setText(name);
+            tAddress.setText(address);
+            tPhone.setText(phone);
+            tDescription.setText(description);
+            tTags.setText(tags);
+            rbRating.setRating(rating);
         findViewById(R.id.btn_map).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,4 +92,5 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
     }
+
 }
