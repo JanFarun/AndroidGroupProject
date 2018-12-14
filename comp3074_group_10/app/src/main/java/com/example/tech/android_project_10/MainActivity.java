@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             if (cursor.moveToFirst()) {
                 while (!cursor.isAfterLast()) {
                     int index = cursor.getInt(0);
-                    listItem.add(dbHelper.getPost(db, index).getName()+"\n"+dbHelper.getPost(db, index).getTags());
+                    listItem.add(dbHelper.getPost(db, index).getName());
                     //+"\n"+dbHelper.getPost(db, index).getTags()
 
                     cursor.moveToNext();
